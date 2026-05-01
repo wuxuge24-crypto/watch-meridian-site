@@ -3,178 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PULSE WATCHES</title>
+<title>PULSE.</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --black: #0d0d0d;
-    --white: #f5f5f5;
-    --acid: #c8ff00;
-    --purple: #9b5dff;
-    --red: #ff3c5f;
-    --gray: #1a1a1a;
-    --mid: #888;
+    --bg: #f7f5f2;
+    --ink: #1a1a1a;
+    --muted: #8a8680;
+    --accent: #c8a97e;
+    --card: #eeebe6;
+    --border: #ddd9d2;
   }
-  body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
 
   nav {
-    position: fixed; top: 0; width: 100%; padding: 0 40px;
+    position: fixed; top: 0; width: 100%; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
-    height: 64px; z-index: 100;
-    background: rgba(13,13,13,0.85); backdrop-filter: blur(20px);
-    border-bottom: 1px solid #222;
+    padding: 0 60px; height: 68px;
+    background: rgba(247,245,242,0.88); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
   }
-  .logo { font-size: 20px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; }
-  .logo span { color: var(--acid); }
-  .nav-links { display: flex; gap: 32px; }
-  .nav-links a { color: var(--mid); text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--acid); }
+  .logo { font-size: 18px; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 40px; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
 
+  /* ── Hero ── */
   .hero {
-    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center; padding: 0 80px; padding-top: 64px;
-    position: relative; overflow: hidden;
+    min-height: 100vh; display: grid; grid-template-columns: 1.1fr 0.9fr;
+    align-items: stretch; padding-top: 68px;
   }
-  .hero::before {
-    content: ''; position: absolute; top: -20%; right: -10%;
-    width: 70%; height: 140%; background: radial-gradient(ellipse, rgba(155,93,255,0.12) 0%, transparent 65%);
-    pointer-events: none;
+  .hero-left {
+    padding: 80px 60px 80px 80px;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--border);
   }
-  .hero::after {
-    content: ''; position: absolute; bottom: -20%; left: -10%;
-    width: 60%; height: 120%; background: radial-gradient(ellipse, rgba(200,255,0,0.07) 0%, transparent 65%);
-    pointer-events: none;
-  }
-  .hero-left { position: relative; z-index: 1; }
-  .hero-tag {
-    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 4px;
-    text-transform: uppercase; color: var(--black); background: var(--acid);
-    padding: 6px 16px; margin-bottom: 28px;
-  }
+  .hero-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; font-weight: 600; }
   .hero-title {
-    font-size: clamp(52px, 6vw, 96px); font-weight: 900;
-    letter-spacing: -2px; line-height: 0.95; text-transform: uppercase;
-    margin-bottom: 24px;
+    font-size: clamp(48px, 5.5vw, 88px); font-weight: 300;
+    letter-spacing: -1px; line-height: 1.05; text-transform: uppercase;
+    margin-bottom: 36px; color: var(--ink);
   }
-  .hero-title .line2 { color: transparent; -webkit-text-stroke: 2px var(--white); }
-  .hero-title .line3 { color: var(--purple); }
-  .hero-desc { font-size: 14px; color: var(--mid); line-height: 1.8; max-width: 380px; margin-bottom: 40px; }
-  .hero-cta {
-    display: inline-flex; align-items: center; gap: 12px;
-    background: var(--acid); color: var(--black); font-weight: 800;
-    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
-    padding: 16px 36px; text-decoration: none; border: none; cursor: pointer;
-    transition: all 0.3s;
+  .hero-title strong { font-weight: 700; }
+  .hero-title em { font-style: normal; color: var(--muted); }
+  .hero-body { font-size: 13px; color: var(--muted); line-height: 1.9; max-width: 380px; margin-bottom: 48px; }
+  .hero-action {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    font-weight: 600; color: var(--ink); text-decoration: none;
+    border-bottom: 1.5px solid var(--ink); padding-bottom: 4px;
+    transition: all 0.25s; width: fit-content;
   }
-  .hero-cta:hover { background: var(--white); transform: translateY(-2px); }
+  .hero-action:hover { color: var(--accent); border-color: var(--accent); }
   .hero-right {
-    position: relative; z-index: 1; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    background: var(--card);
   }
-  .watch-visual {
-    width: 380px; height: 380px; position: relative;
-    display: flex; align-items: center; justify-content: center;
+  .hero-img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: brightness(0.95) contrast(1.05);
   }
-  .watch-glow {
-    position: absolute; inset: 0; border-radius: 50%;
-    background: conic-gradient(from 0deg, var(--purple), var(--acid), var(--red), var(--purple));
-    filter: blur(40px); opacity: 0.35; animation: spin 8s linear infinite;
+  .hero-img-label {
+    position: absolute; bottom: 28px; left: 28px;
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted); background: rgba(247,245,242,0.85); padding: 8px 14px; backdrop-filter: blur(10px);
   }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .watch-case {
-    width: 280px; height: 280px; border-radius: 50%; background: #111;
-    border: 2px solid #333; position: relative;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 60px rgba(155,93,255,0.2), 0 30px 60px rgba(0,0,0,0.8);
-  }
-  .watch-face-inner {
-    width: 220px; height: 220px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #1e1e1e, #0a0a0a);
-    border: 1px solid #333; position: relative;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-  }
-  .wf-brand { font-size: 9px; font-weight: 900; letter-spacing: 4px; color: var(--acid); text-transform: uppercase; }
-  .wf-model { font-size: 7px; letter-spacing: 2px; color: #444; margin-top: 4px; }
-  .wf-hands { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .wf-h { width: 3px; height: 55px; background: linear-gradient(to top, var(--acid), #fff); border-radius: 2px; position: absolute; bottom: 50%; left: calc(50% - 1.5px); transform-origin: bottom center; transform: rotate(140deg); }
-  .wf-m { width: 2px; height: 80px; background: linear-gradient(to top, #888, #ccc); border-radius: 2px; position: absolute; bottom: 50%; left: calc(50% - 1px); transform-origin: bottom center; transform: rotate(280deg); }
-  .wf-s { width: 1px; height: 95px; background: var(--purple); border-radius: 1px; position: absolute; bottom: 50%; left: calc(50% - 0.5px); transform-origin: bottom center; transform: rotate(60deg); }
-  .wf-center { width: 7px; height: 7px; border-radius: 50%; background: var(--acid); position: relative; z-index: 2; }
 
-  /* Marquee */
-  .marquee { border-top: 1px solid #222; border-bottom: 1px solid #222; padding: 14px 0; overflow: hidden; white-space: nowrap; }
-  .marquee-inner { display: inline-block; animation: marquee 20s linear infinite; font-size: 11px; font-weight: 700; letter-spacing: 4px; color: #333; text-transform: uppercase; }
-  .marquee-inner span { margin: 0 30px; }
-  .marquee-inner span.accent { color: var(--acid); }
-  @keyframes marquee { to { transform: translateX(-50%); } }
+  /* ── Marquee ── */
+  .ticker {
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 16px 0; overflow: hidden;
+  }
+  .ticker-inner {
+    display: inline-flex; gap: 0; white-space: nowrap;
+    animation: ticker 28s linear infinite;
+    font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); font-weight: 500;
+  }
+  .ticker-inner span { margin: 0 32px; }
+  .ticker-inner span b { color: var(--accent); font-weight: 400; }
+  @keyframes ticker { to { transform: translateX(-50%); } }
 
-  /* Products */
+  /* ── Editorial Section ── */
+  .editorial { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+  .ed-visual { overflow: hidden; background: var(--card); }
+  .ed-visual img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.93) contrast(1.05); }
+  .ed-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid var(--border); }
+  .ed-num { font-size: 72px; font-weight: 300; color: var(--border); line-height: 1; margin-bottom: 24px; }
+  .ed-title { font-size: clamp(28px, 3vw, 44px); font-weight: 300; line-height: 1.2; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
+  .ed-title strong { font-weight: 700; }
+  .ed-text { font-size: 13px; color: var(--muted); line-height: 2; max-width: 360px; }
+  .ed-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 36px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 3px; transition: all 0.2s; }
+  .ed-link:hover { color: var(--accent); }
+
+  /* ── Products ── */
   .section { padding: 100px 80px; }
-  .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 60px; }
-  .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 4px; color: var(--acid); text-transform: uppercase; margin-bottom: 12px; }
-  .section-title { font-size: clamp(36px, 4vw, 64px); font-weight: 900; text-transform: uppercase; letter-spacing: -1px; line-height: 1; }
-  .section-title .outline { color: transparent; -webkit-text-stroke: 2px var(--white); }
-  .view-all { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); text-decoration: none; border-bottom: 1px solid #333; padding-bottom: 4px; transition: all 0.2s; }
-  .view-all:hover { color: var(--acid); border-color: var(--acid); }
+  .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+  .s-tag { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+  .s-title { font-size: clamp(28px, 3vw, 48px); font-weight: 300; text-transform: uppercase; letter-spacing: 3px; }
+  .s-title strong { font-weight: 700; }
+  .s-link { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); text-decoration: none; font-weight: 500; border-bottom: 1px solid var(--border); padding-bottom: 3px; transition: all 0.2s; }
+  .s-link:hover { color: var(--ink); border-color: var(--ink); }
 
-  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .product-card { background: var(--gray); border: 1px solid #222; overflow: hidden; transition: all 0.3s; cursor: pointer; position: relative; }
-  .product-card:hover { border-color: var(--purple); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(155,93,255,0.15); }
-  .product-img { height: 280px; background: #111; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-  .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .product-badge { position: absolute; top: 12px; left: 12px; font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; }
-  .badge-new { background: var(--acid); color: var(--black); }
-  .badge-hot { background: var(--red); color: var(--white); }
-  .product-body { padding: 24px; }
-  .product-name { font-size: 16px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-  .product-series { font-size: 11px; color: var(--mid); letter-spacing: 1px; margin-bottom: 16px; }
-  .product-bottom { display: flex; align-items: center; justify-content: space-between; }
-  .product-price { font-size: 20px; font-weight: 900; color: var(--acid); }
-  .product-price small { font-size: 11px; font-weight: 400; color: var(--mid); margin-left: 4px; }
-  .product-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--acid); color: var(--black); border: none; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-  .product-btn:hover { background: var(--white); transform: scale(1.1); }
+  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .product-card { background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: all 0.35s; cursor: pointer; }
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+  .product-img { height: 320px; background: #e5e1db; overflow: hidden; position: relative; }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.95); transition: transform 0.5s; }
+  .product-card:hover .product-img img { transform: scale(1.04); }
+  .product-badge { position: absolute; top: 14px; left: 14px; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; padding: 5px 12px; background: var(--ink); color: var(--bg); }
+  .product-body { padding: 24px 22px 28px; }
+  .product-name { font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .product-sub { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-bottom: 20px; }
+  .product-bottom { display: flex; justify-content: space-between; align-items: center; }
+  .product-price { font-size: 18px; font-weight: 600; color: var(--ink); }
+  .product-price small { font-size: 10px; font-weight: 400; color: var(--muted); margin-left: 3px; }
+  .product-add { width: 32px; height: 32px; border-radius: 50%; background: var(--ink); color: var(--bg); border: none; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .product-add:hover { background: var(--accent); }
 
-  /* Feature bands */
-  .feature-band { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #222; border-bottom: 1px solid #222; }
-  .feat { padding: 40px 30px; border-right: 1px solid #222; }
-  .feat:last-child { border-right: none; }
-  .feat-icon { font-size: 28px; margin-bottom: 16px; }
-  .feat-num { font-size: 32px; font-weight: 900; color: var(--acid); margin-bottom: 8px; }
-  .feat-label { font-size: 11px; color: var(--mid); letter-spacing: 2px; text-transform: uppercase; }
+  /* ── Pull Quote ── */
+  .quote-section { background: var(--ink); color: var(--bg); padding: 100px 80px; text-align: center; }
+  .quote-text { font-size: clamp(28px, 4vw, 52px); font-weight: 300; line-height: 1.3; letter-spacing: 2px; text-transform: uppercase; max-width: 900px; margin: 0 auto 32px; }
+  .quote-text strong { font-weight: 700; }
+  .quote-attr { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); }
 
-  /* Drop section */
-  .drop-section { background: var(--gray); border: 1px solid #222; padding: 80px; text-align: center; position: relative; overflow: hidden; }
-  .drop-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 100%, rgba(200,255,0,0.08) 0%, transparent 70%); pointer-events: none; }
-  .drop-tag { font-size: 11px; font-weight: 900; letter-spacing: 6px; color: var(--acid); text-transform: uppercase; margin-bottom: 24px; }
-  .drop-title { font-size: clamp(40px, 6vw, 80px); font-weight: 900; text-transform: uppercase; letter-spacing: -2px; line-height: 0.95; margin-bottom: 20px; }
-  .drop-title span { color: var(--acid); }
-  .drop-sub { font-size: 14px; color: var(--mid); margin-bottom: 40px; }
-  .drop-timer { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
-  .timer-unit { text-align: center; }
-  .timer-num { font-size: 40px; font-weight: 900; color: var(--white); line-height: 1; }
-  .timer-label { font-size: 10px; color: var(--mid); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
-  .drop-btn { display: inline-block; background: var(--acid); color: var(--black); font-weight: 900; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; padding: 18px 50px; text-decoration: none; transition: all 0.3s; }
-  .drop-btn:hover { background: var(--white); transform: translateY(-2px); }
+  /* ── Stats ── */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .stat { padding: 48px 40px; border-right: 1px solid var(--border); text-align: center; }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-size: 40px; font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: 10px; }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); }
 
-  footer { border-top: 1px solid #222; padding: 48px 80px; display: flex; justify-content: space-between; align-items: center; }
-  .footer-logo { font-size: 18px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; }
-  .footer-logo span { color: var(--acid); }
-  .footer-copy { font-size: 11px; color: #333; letter-spacing: 2px; }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-size: 11px; color: var(--mid); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--acid); }
+  /* ── Footer ── */
+  footer { padding: 60px 80px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
+  .f-logo { font-size: 16px; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; }
+  .f-logo span { color: var(--accent); }
+  .f-links { display: flex; gap: 28px; }
+  .f-links a { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .f-links a:hover { color: var(--ink); }
+  .f-copy { font-size: 10px; color: var(--muted); letter-spacing: 2px; }
 
   @media (max-width: 768px) {
-    .hero { grid-template-columns: 1fr; padding: 80px 30px; text-align: center; }
-    .hero-right { margin-top: 40px; }
-    .hero-desc { margin: 0 auto 40px; }
-    .section { padding: 80px 30px; }
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 24px; border-right: none; border-bottom: 1px solid var(--border); min-height: 60vh; }
+    .editorial { grid-template-columns: 1fr; }
+    .section { padding: 60px 24px; }
     .product-grid { grid-template-columns: 1fr; }
-    .feature-band { grid-template-columns: repeat(2, 1fr); }
-    .section-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
     footer { flex-direction: column; gap: 24px; text-align: center; }
-    .drop-section { padding: 60px 30px; }
-    .drop-timer { gap: 12px; }
-    .timer-num { font-size: 28px; }
+    .quote-section { padding: 60px 24px; }
   }
 </style>
 </head>
@@ -183,8 +163,8 @@
 <nav>
   <div class="logo">PULSE<span>.</span></div>
   <div class="nav-links">
-    <a href="#drops">Drops</a>
     <a href="#collection">Collection</a>
+    <a href="#editorial">Editorial</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </div>
@@ -192,179 +172,138 @@
 
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-tag">2026 New Collection</div>
+    <div class="hero-eyebrow">New Collection · 2026</div>
     <h1 class="hero-title">
-      WEAR<br>
-      <span class="line2">YOUR</span><br>
-      <span class="line3">PULSE</span>
+      Wear<br>
+      <em>Your</em><br>
+      <strong>Moment</strong>
     </h1>
-    <p class="hero-desc">年轻一代的计时工具。不止精准，更要有型。PULSE 为Z世代而生——大胆配色、前卫造型、街头灵魂。</p>
-    <a href="#collection" class="hero-cta">探索系列 →</a>
+    <p class="hero-body">
+      每一枚 PULSE，都是对时间的重新注解。不讨好、不跟随——只给懂的人。
+    </p>
+    <a href="#collection" class="hero-action">探索系列 →</a>
   </div>
   <div class="hero-right">
-    <div class="watch-visual">
-      <div class="watch-glow"></div>
-      <div class="watch-case">
-        <div class="watch-face-inner">
-          <span class="wf-brand">PULSE</span>
-          <span class="wf-model">SW2026</span>
-          <div class="wf-hands">
-            <div class="wf-h"></div>
-            <div class="wf-m"></div>
-            <div class="wf-s"></div>
-            <div class="wf-center"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <img class="hero-img" src="img/cover1.jpg" alt="PULSE editorial">
+    <div class="hero-img-label">PULSE 2026 · Editorial</div>
   </div>
 </section>
 
-<div class="marquee">
-  <div class="marquee-inner">
-    <span>瑞士机芯</span><span class="accent">★</span>
-    <span>100米防水</span><span class="accent">★</span>
-    <span>蓝宝石镜面</span><span class="accent">★</span>
-    <span>全球联保</span><span class="accent">★</span>
-    <span>新品发售</span><span class="accent">★</span>
-    <span>瑞士机芯</span><span class="accent">★</span>
-    <span>100米防水</span><span class="accent">★</span>
-    <span>蓝宝石镜面</span><span class="accent">★</span>
-    <span>全球联保</span><span class="accent">★</span>
-    <span>新品发售</span><span class="accent">★</span>
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>瑞士机芯<b> ★</b></span>
+    <span>100米防水<b> ★</b></span>
+    <span>蓝宝石镜面<b> ★</b></span>
+    <span>全球联保<b> ★</b></span>
+    <span>限量编号<b> ★</b></span>
+    <span>瑞士机芯<b> ★</b></span>
+    <span>100米防水<b> ★</b></span>
+    <span>蓝宝石镜面<b> ★</b></span>
+    <span>全球联保<b> ★</b></span>
+    <span>限量编号<b> ★</b></span>
   </div>
 </div>
 
-<section class="section" id="drops">
-  <div class="drop-section">
-    <div class="drop-tag">⚡ Limited Drop</div>
-    <h2 class="drop-title">NEON<br><span>DROP 001</span></h2>
-    <p class="drop-sub">全球限量 500 枚 · 荧光绿 × 深空黑 · 编号珍藏版</p>
-    <div class="drop-timer">
-      <div class="timer-unit"><div class="timer-num" id="d">02</div><div class="timer-label">Days</div></div>
-      <div class="timer-unit"><div class="timer-num" id="h">14</div><div class="timer-label">Hours</div></div>
-      <div class="timer-unit"><div class="timer-num" id="m">37</div><div class="timer-label">Mins</div></div>
-      <div class="timer-unit"><div class="timer-num" id="s">52</div><div class="timer-label">Secs</div></div>
-    </div>
-    <a href="#" class="drop-btn">立即预约</a>
+<section class="editorial" id="editorial">
+  <div class="ed-visual">
+    <img src="img/cover2.jpg" alt="PULSE editorial">
+  </div>
+  <div class="ed-content">
+    <div class="ed-num">01</div>
+    <h2 class="ed-title">The<br><strong>Art of</strong><br>Less</h2>
+    <p class="ed-text">
+      少即是多。删去多余的，留下的才是真正的态度。PULSE 从不追随潮流——我们定义它。每一处线条、每一道光影，都经过反复推敲。
+    </p>
+    <a href="#collection" class="ed-link">View Collection →</a>
   </div>
 </section>
 
 <section class="section" id="collection">
   <div class="section-head">
     <div>
-      <div class="section-tag">精选系列</div>
-      <h2 class="section-title">THE<br><span class="outline">COLLECTION</span></h2>
+      <div class="s-tag">精选系列</div>
+      <h2 class="s-title"><strong>The</strong> Collection</h2>
     </div>
-    <a href="#" class="view-all">VIEW ALL →</a>
+    <a href="#" class="s-link">VIEW ALL →</a>
   </div>
   <div class="product-grid">
     <div class="product-card">
       <div class="product-img">
-        <img src="img/watch1.png" alt="X1 CHRONO" onerror="this.style.display='none'">
-        <span class="product-badge badge-new">NEW</span>
+        <img src="img/p1.jpg" alt="X1 Chrono" onerror="this.parentElement.style.background='#e5e1db'">
+        <span class="product-badge">New</span>
       </div>
       <div class="product-body">
-        <div class="product-name">X1 CHRONO</div>
-        <div class="product-series">街头系列 · 自动机械</div>
+        <div class="product-name">X1 Chrono</div>
+        <div class="product-sub">经典系列 · 自动机械</div>
         <div class="product-bottom">
           <div class="product-price">¥ 3,980 <small>起</small></div>
-          <button class="product-btn">+</button>
+          <button class="product-add">+</button>
         </div>
       </div>
     </div>
     <div class="product-card">
       <div class="product-img">
-        <img src="img/watch2.png" alt="NEON RUNNER" onerror="this.style.display='none'">
-        <span class="product-badge badge-hot">HOT</span>
+        <img src="img/p2.jpg" alt="Neon Runner" onerror="this.parentElement.style.background='#e5e1db'">
+        <span class="product-badge">Hot</span>
       </div>
       <div class="product-body">
-        <div class="product-name">NEON RUNNER</div>
-        <div class="product-series">运动系列 · 石英机芯</div>
+        <div class="product-name">Neon Runner</div>
+        <div class="product-sub">运动系列 · 石英机芯</div>
         <div class="product-bottom">
           <div class="product-price">¥ 2,680 <small>起</small></div>
-          <button class="product-btn">+</button>
+          <button class="product-add">+</button>
         </div>
       </div>
     </div>
     <div class="product-card">
       <div class="product-img">
-        <img src="img/watch3.png" alt="VOID X" onerror="this.style.display='none'">
+        <img src="img/p3.jpg" alt="Void X" onerror="this.parentElement.style.background='#e5e1db'">
       </div>
       <div class="product-body">
-        <div class="product-name">VOID X</div>
-        <div class="product-series">赛博系列 · 限量编号</div>
+        <div class="product-name">Void X</div>
+        <div class="product-sub">赛博系列 · 限量编号</div>
         <div class="product-bottom">
           <div class="product-price">¥ 5,280 <small>起</small></div>
-          <button class="product-btn">+</button>
+          <button class="product-add">+</button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="feature-band">
-  <div class="feat">
-    <div class="feat-icon">⚙</div>
-    <div class="feat-num">200</div>
-    <div class="feat-label">道精密工序</div>
+<div class="quote-section">
+  <p class="quote-text">"Time is not <strong>measured</strong><br>by clocks, but by <strong>moments</strong>."</p>
+  <div class="quote-attr">— PULSE Design Philosophy</div>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">200<span>+</span></div>
+    <div class="stat-label">精密工序</div>
   </div>
-  <div class="feat">
-    <div class="feat-icon">🌊</div>
-    <div class="feat-num">100M</div>
-    <div class="feat-label">生活防水</div>
+  <div class="stat">
+    <div class="stat-num">100<span>M</span></div>
+    <div class="stat-label">生活防水</div>
   </div>
-  <div class="feat">
-    <div class="feat-icon">💎</div>
-    <div class="feat-num">9H</div>
-    <div class="feat-label">蓝宝石硬度</div>
+  <div class="stat">
+    <div class="stat-num">9<span>H</span></div>
+    <div class="stat-label">蓝宝石硬度</div>
   </div>
-  <div class="feat">
-    <div class="feat-icon">🕐</div>
-    <div class="feat-num">±5s</div>
-    <div class="feat-label">日误差精度</div>
+  <div class="stat">
+    <div class="stat-num">±5<span>s</span></div>
+    <div class="stat-label">日误差</div>
   </div>
-</section>
+</div>
 
 <footer id="contact">
-  <div class="footer-logo">PULSE<span>.</span></div>
-  <div class="footer-links">
+  <div class="f-logo">PULSE<span>.</span></div>
+  <div class="f-links">
     <a href="#">Instagram</a>
     <a href="#">小红书</a>
     <a href="#">微博</a>
-    <a href="#">抖音</a>
   </div>
-  <div class="footer-copy">© 2026 PULSE WATCHES. ALL RIGHTS RESERVED.</div>
+  <div class="f-copy">© 2026 PULSE WATCHES. ALL RIGHTS RESERVED.</div>
 </footer>
 
-<script>
-  // 实时秒针
-  function tick() {
-    const now = new Date();
-    const sec = now.getSeconds(), min = now.getMinutes();
-    const hr = now.getHours() % 12;
-    const s = sec * 6, m = min * 6 + sec * 0.1, h = hr * 30 + min * 0.5;
-    document.querySelector('.wf-s').style.transform = `rotate(${s}deg)`;
-    document.querySelector('.wf-m').style.transform = `rotate(${m}deg)`;
-    document.querySelector('.wf-h').style.transform = `rotate(${h}deg)`;
-  }
-  tick(); setInterval(tick, 1000);
-
-  // 倒计时（距离2026-06-01）
-  function countdown() {
-    const end = new Date('2026-06-01T00:00:00+08:00');
-    const now = new Date();
-    const diff = Math.max(0, end - now);
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('d').textContent = String(d).padStart(2,'0');
-    document.getElementById('h').textContent = String(h).padStart(2,'0');
-    document.getElementById('m').textContent = String(m).padStart(2,'0');
-    document.getElementById('s').textContent = String(s).padStart(2,'0');
-  }
-  countdown(); setInterval(countdown, 1000);
-</script>
 </body>
 </html>
