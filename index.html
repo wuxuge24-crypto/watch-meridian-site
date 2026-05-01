@@ -3,186 +3,368 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MERIDIAN 腕表</title>
+<title>PULSE WATCHES</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Helvetica Neue', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
-  nav { position: fixed; top: 0; width: 100%; padding: 24px 60px; display: flex; justify-content: space-between; align-items: center; z-index: 100; background: rgba(10,10,10,0.8); backdrop-filter: blur(20px); }
-  .logo { font-size: 22px; font-weight: 700; letter-spacing: 6px; }
-  .nav-links { display: flex; gap: 40px; }
-  .nav-links a { color: #888; text-decoration: none; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
-  .nav-links a:hover { color: #fff; }
-  .hero { height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; position: relative; }
-  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, rgba(180,140,80,0.15) 0%, transparent 70%); pointer-events: none; }
-  .hero-content { text-align: center; position: relative; z-index: 1; }
-  .hero-tag { font-size: 11px; letter-spacing: 6px; color: #b48c50; text-transform: uppercase; margin-bottom: 30px; }
-  .hero h1 { font-size: 72px; font-weight: 300; letter-spacing: 12px; line-height: 1.1; margin-bottom: 20px; }
-  .hero h1 span { font-weight: 700; }
-  .hero-sub { font-size: 14px; color: #666; letter-spacing: 3px; margin-bottom: 60px; }
-  .watch-img { width: 300px; height: 300px; margin: 0 auto 60px; position: relative; }
-  .watch-img::before { content: ''; position: absolute; inset: -20px; border-radius: 50%; background: radial-gradient(circle, rgba(180,140,80,0.3) 0%, transparent 70%); animation: pulse 3s ease-in-out infinite; }
-  .watch-circle { width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(180,140,80,0.4); display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, #1a1a1a, #0a0a0a); box-shadow: 0 0 60px rgba(180,140,80,0.15), inset 0 0 40px rgba(0,0,0,0.8); }
-  .watch-face { width: 80%; height: 80%; border-radius: 50%; border: 1px solid rgba(180,140,80,0.25); position: relative; display: flex; align-items: center; justify-content: center; }
-  .watch-brand { font-size: 9px; letter-spacing: 4px; color: #b48c50; text-transform: uppercase; position: absolute; top: 28%; }
-  .watch-model { font-size: 7px; letter-spacing: 2px; color: #555; position: absolute; top: 36%; }
-  .hour-hand { position: absolute; width: 4px; height: 60px; background: linear-gradient(to top, #b48c50, #d4a864); top: 20px; left: calc(50% - 2px); transform-origin: bottom center; transform: rotate(135deg); border-radius: 2px; }
-  .minute-hand { position: absolute; width: 2px; height: 90px; background: linear-gradient(to top, #888, #ccc); top: 10px; left: calc(50% - 1px); transform-origin: bottom center; transform: rotate(270deg); border-radius: 2px; }
-  .second-hand { position: absolute; width: 1px; height: 100px; background: #b48c50; top: 0; left: calc(50% - 0.5px); transform-origin: bottom center; transform: rotate(80deg); border-radius: 1px; }
-  .center-dot { width: 8px; height: 8px; background: #b48c50; border-radius: 50%; position: relative; z-index: 2; }
-  .watch-mark { position: absolute; width: 1px; height: 8px; background: rgba(180,140,80,0.6); top: 8px; left: calc(50% - 0.5px); transform-origin: center 116px; }
-  .cta-btn { display: inline-block; padding: 16px 50px; border: 1px solid #b48c50; color: #b48c50; text-decoration: none; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; transition: all 0.4s; }
-  .cta-btn:hover { background: #b48c50; color: #0a0a0a; }
-  .section { padding: 120px 60px; }
-  .section-title { font-size: 11px; letter-spacing: 6px; color: #b48c50; text-transform: uppercase; margin-bottom: 20px; }
-  .section-heading { font-size: 42px; font-weight: 300; letter-spacing: 4px; margin-bottom: 80px; }
-  .collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
-  .watch-card { background: #111; border: 1px solid #1a1a1a; padding: 40px; text-align: center; transition: all 0.4s; cursor: pointer; }
-  .watch-card:hover { border-color: #b48c50; transform: translateY(-5px); }
-  .card-img { width: 160px; height: 160px; margin: 0 auto 30px; border-radius: 50%; border: 1px solid #222; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, #1a1a1a, #0d0d0d); }
-  .card-name { font-size: 14px; letter-spacing: 3px; margin-bottom: 8px; }
-  .card-series { font-size: 11px; color: #555; letter-spacing: 2px; margin-bottom: 20px; }
-  .card-price { font-size: 16px; color: #b48c50; letter-spacing: 1px; }
-  .feature-section { background: #080808; }
-  .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; text-align: center; }
-  .feature-icon { width: 48px; height: 48px; border: 1px solid #b48c50; border-radius: 50%; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; color: #b48c50; font-size: 20px; }
-  .feature-title { font-size: 13px; letter-spacing: 2px; margin-bottom: 12px; }
-  .feature-desc { font-size: 12px; color: #555; line-height: 1.8; }
-  .about-section { max-width: 800px; margin: 0 auto; text-align: center; }
-  .about-text { font-size: 16px; color: #666; line-height: 2.2; font-weight: 300; }
-  footer { border-top: 1px solid #1a1a1a; padding: 60px; text-align: center; }
-  .footer-logo { font-size: 18px; font-weight: 700; letter-spacing: 6px; margin-bottom: 20px; }
+  :root {
+    --black: #0d0d0d;
+    --white: #f5f5f5;
+    --acid: #c8ff00;
+    --purple: #9b5dff;
+    --red: #ff3c5f;
+    --gray: #1a1a1a;
+    --mid: #888;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; width: 100%; padding: 0 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    height: 64px; z-index: 100;
+    background: rgba(13,13,13,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid #222;
+  }
+  .logo { font-size: 20px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; }
+  .logo span { color: var(--acid); }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { color: var(--mid); text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--acid); }
+
+  .hero {
+    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; padding: 0 80px; padding-top: 64px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -20%; right: -10%;
+    width: 70%; height: 140%; background: radial-gradient(ellipse, rgba(155,93,255,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -20%; left: -10%;
+    width: 60%; height: 120%; background: radial-gradient(ellipse, rgba(200,255,0,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-left { position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--black); background: var(--acid);
+    padding: 6px 16px; margin-bottom: 28px;
+  }
+  .hero-title {
+    font-size: clamp(52px, 6vw, 96px); font-weight: 900;
+    letter-spacing: -2px; line-height: 0.95; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-title .line2 { color: transparent; -webkit-text-stroke: 2px var(--white); }
+  .hero-title .line3 { color: var(--purple); }
+  .hero-desc { font-size: 14px; color: var(--mid); line-height: 1.8; max-width: 380px; margin-bottom: 40px; }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--acid); color: var(--black); font-weight: 800;
+    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 16px 36px; text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .hero-cta:hover { background: var(--white); transform: translateY(-2px); }
+  .hero-right {
+    position: relative; z-index: 1; display: flex; align-items: center; justify-content: center;
+  }
+  .watch-visual {
+    width: 380px; height: 380px; position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .watch-glow {
+    position: absolute; inset: 0; border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--purple), var(--acid), var(--red), var(--purple));
+    filter: blur(40px); opacity: 0.35; animation: spin 8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .watch-case {
+    width: 280px; height: 280px; border-radius: 50%; background: #111;
+    border: 2px solid #333; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 60px rgba(155,93,255,0.2), 0 30px 60px rgba(0,0,0,0.8);
+  }
+  .watch-face-inner {
+    width: 220px; height: 220px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #1e1e1e, #0a0a0a);
+    border: 1px solid #333; position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .wf-brand { font-size: 9px; font-weight: 900; letter-spacing: 4px; color: var(--acid); text-transform: uppercase; }
+  .wf-model { font-size: 7px; letter-spacing: 2px; color: #444; margin-top: 4px; }
+  .wf-hands { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .wf-h { width: 3px; height: 55px; background: linear-gradient(to top, var(--acid), #fff); border-radius: 2px; position: absolute; bottom: 50%; left: calc(50% - 1.5px); transform-origin: bottom center; transform: rotate(140deg); }
+  .wf-m { width: 2px; height: 80px; background: linear-gradient(to top, #888, #ccc); border-radius: 2px; position: absolute; bottom: 50%; left: calc(50% - 1px); transform-origin: bottom center; transform: rotate(280deg); }
+  .wf-s { width: 1px; height: 95px; background: var(--purple); border-radius: 1px; position: absolute; bottom: 50%; left: calc(50% - 0.5px); transform-origin: bottom center; transform: rotate(60deg); }
+  .wf-center { width: 7px; height: 7px; border-radius: 50%; background: var(--acid); position: relative; z-index: 2; }
+
+  /* Marquee */
+  .marquee { border-top: 1px solid #222; border-bottom: 1px solid #222; padding: 14px 0; overflow: hidden; white-space: nowrap; }
+  .marquee-inner { display: inline-block; animation: marquee 20s linear infinite; font-size: 11px; font-weight: 700; letter-spacing: 4px; color: #333; text-transform: uppercase; }
+  .marquee-inner span { margin: 0 30px; }
+  .marquee-inner span.accent { color: var(--acid); }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* Products */
+  .section { padding: 100px 80px; }
+  .section-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 60px; }
+  .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 4px; color: var(--acid); text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { font-size: clamp(36px, 4vw, 64px); font-weight: 900; text-transform: uppercase; letter-spacing: -1px; line-height: 1; }
+  .section-title .outline { color: transparent; -webkit-text-stroke: 2px var(--white); }
+  .view-all { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); text-decoration: none; border-bottom: 1px solid #333; padding-bottom: 4px; transition: all 0.2s; }
+  .view-all:hover { color: var(--acid); border-color: var(--acid); }
+
+  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .product-card { background: var(--gray); border: 1px solid #222; overflow: hidden; transition: all 0.3s; cursor: pointer; position: relative; }
+  .product-card:hover { border-color: var(--purple); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(155,93,255,0.15); }
+  .product-img { height: 280px; background: #111; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .product-badge { position: absolute; top: 12px; left: 12px; font-size: 10px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; }
+  .badge-new { background: var(--acid); color: var(--black); }
+  .badge-hot { background: var(--red); color: var(--white); }
+  .product-body { padding: 24px; }
+  .product-name { font-size: 16px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .product-series { font-size: 11px; color: var(--mid); letter-spacing: 1px; margin-bottom: 16px; }
+  .product-bottom { display: flex; align-items: center; justify-content: space-between; }
+  .product-price { font-size: 20px; font-weight: 900; color: var(--acid); }
+  .product-price small { font-size: 11px; font-weight: 400; color: var(--mid); margin-left: 4px; }
+  .product-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--acid); color: var(--black); border: none; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .product-btn:hover { background: var(--white); transform: scale(1.1); }
+
+  /* Feature bands */
+  .feature-band { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #222; border-bottom: 1px solid #222; }
+  .feat { padding: 40px 30px; border-right: 1px solid #222; }
+  .feat:last-child { border-right: none; }
+  .feat-icon { font-size: 28px; margin-bottom: 16px; }
+  .feat-num { font-size: 32px; font-weight: 900; color: var(--acid); margin-bottom: 8px; }
+  .feat-label { font-size: 11px; color: var(--mid); letter-spacing: 2px; text-transform: uppercase; }
+
+  /* Drop section */
+  .drop-section { background: var(--gray); border: 1px solid #222; padding: 80px; text-align: center; position: relative; overflow: hidden; }
+  .drop-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 100%, rgba(200,255,0,0.08) 0%, transparent 70%); pointer-events: none; }
+  .drop-tag { font-size: 11px; font-weight: 900; letter-spacing: 6px; color: var(--acid); text-transform: uppercase; margin-bottom: 24px; }
+  .drop-title { font-size: clamp(40px, 6vw, 80px); font-weight: 900; text-transform: uppercase; letter-spacing: -2px; line-height: 0.95; margin-bottom: 20px; }
+  .drop-title span { color: var(--acid); }
+  .drop-sub { font-size: 14px; color: var(--mid); margin-bottom: 40px; }
+  .drop-timer { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
+  .timer-unit { text-align: center; }
+  .timer-num { font-size: 40px; font-weight: 900; color: var(--white); line-height: 1; }
+  .timer-label { font-size: 10px; color: var(--mid); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+  .drop-btn { display: inline-block; background: var(--acid); color: var(--black); font-weight: 900; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; padding: 18px 50px; text-decoration: none; transition: all 0.3s; }
+  .drop-btn:hover { background: var(--white); transform: translateY(-2px); }
+
+  footer { border-top: 1px solid #222; padding: 48px 80px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-size: 18px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; }
+  .footer-logo span { color: var(--acid); }
   .footer-copy { font-size: 11px; color: #333; letter-spacing: 2px; }
-  @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 11px; color: var(--mid); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--acid); }
+
   @media (max-width: 768px) {
-    .hero h1 { font-size: 36px; letter-spacing: 6px; }
-    nav { padding: 20px 30px; }
-    .nav-links { display: none; }
-    .collection-grid { grid-template-columns: 1fr; }
-    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero { grid-template-columns: 1fr; padding: 80px 30px; text-align: center; }
+    .hero-right { margin-top: 40px; }
+    .hero-desc { margin: 0 auto 40px; }
     .section { padding: 80px 30px; }
+    .product-grid { grid-template-columns: 1fr; }
+    .feature-band { grid-template-columns: repeat(2, 1fr); }
+    .section-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+    footer { flex-direction: column; gap: 24px; text-align: center; }
+    .drop-section { padding: 60px 30px; }
+    .drop-timer { gap: 12px; }
+    .timer-num { font-size: 28px; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">MERIDIAN</div>
+  <div class="logo">PULSE<span>.</span></div>
   <div class="nav-links">
-    <a href="#collection">系列</a>
-    <a href="#craft">工艺</a>
-    <a href="#about">关于</a>
-    <a href="#contact">联系</a>
+    <a href="#drops">Drops</a>
+    <a href="#collection">Collection</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-tag">瑞士制表 · 始于1872</div>
-    <h1>TIME <span>IS</span><br>ART</h1>
-    <div class="hero-sub">每一秒，都是永恒</div>
-    <div class="watch-img">
-      <div class="watch-circle">
-        <div class="watch-face">
-          <span class="watch-brand">MERIDIAN</span>
-          <span class="watch-model">CAL. 9000</span>
-          <div class="hour-hand"></div>
-          <div class="minute-hand"></div>
-          <div class="second-hand"></div>
-          <div class="center-dot"></div>
+  <div class="hero-left">
+    <div class="hero-tag">2026 New Collection</div>
+    <h1 class="hero-title">
+      WEAR<br>
+      <span class="line2">YOUR</span><br>
+      <span class="line3">PULSE</span>
+    </h1>
+    <p class="hero-desc">年轻一代的计时工具。不止精准，更要有型。PULSE 为Z世代而生——大胆配色、前卫造型、街头灵魂。</p>
+    <a href="#collection" class="hero-cta">探索系列 →</a>
+  </div>
+  <div class="hero-right">
+    <div class="watch-visual">
+      <div class="watch-glow"></div>
+      <div class="watch-case">
+        <div class="watch-face-inner">
+          <span class="wf-brand">PULSE</span>
+          <span class="wf-model">SW2026</span>
+          <div class="wf-hands">
+            <div class="wf-h"></div>
+            <div class="wf-m"></div>
+            <div class="wf-s"></div>
+            <div class="wf-center"></div>
+          </div>
         </div>
       </div>
     </div>
-    <a href="#collection" class="cta-btn">探索系列</a>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>瑞士机芯</span><span class="accent">★</span>
+    <span>100米防水</span><span class="accent">★</span>
+    <span>蓝宝石镜面</span><span class="accent">★</span>
+    <span>全球联保</span><span class="accent">★</span>
+    <span>新品发售</span><span class="accent">★</span>
+    <span>瑞士机芯</span><span class="accent">★</span>
+    <span>100米防水</span><span class="accent">★</span>
+    <span>蓝宝石镜面</span><span class="accent">★</span>
+    <span>全球联保</span><span class="accent">★</span>
+    <span>新品发售</span><span class="accent">★</span>
+  </div>
+</div>
+
+<section class="section" id="drops">
+  <div class="drop-section">
+    <div class="drop-tag">⚡ Limited Drop</div>
+    <h2 class="drop-title">NEON<br><span>DROP 001</span></h2>
+    <p class="drop-sub">全球限量 500 枚 · 荧光绿 × 深空黑 · 编号珍藏版</p>
+    <div class="drop-timer">
+      <div class="timer-unit"><div class="timer-num" id="d">02</div><div class="timer-label">Days</div></div>
+      <div class="timer-unit"><div class="timer-num" id="h">14</div><div class="timer-label">Hours</div></div>
+      <div class="timer-unit"><div class="timer-num" id="m">37</div><div class="timer-label">Mins</div></div>
+      <div class="timer-unit"><div class="timer-num" id="s">52</div><div class="timer-label">Secs</div></div>
+    </div>
+    <a href="#" class="drop-btn">立即预约</a>
   </div>
 </section>
 
 <section class="section" id="collection">
-  <div class="section-title">精选系列</div>
-  <h2 class="section-heading">CLASSIC COLLECTION</h2>
-  <div class="collection-grid">
-    <div class="watch-card">
-      <div class="card-img" style="box-shadow: 0 0 30px rgba(180,140,80,0.1);"></div>
-      <div class="card-name">GRAND CRONOS</div>
-      <div class="card-series">经典系列 · 机械表</div>
-      <div class="card-price">¥ 68,800</div>
+  <div class="section-head">
+    <div>
+      <div class="section-tag">精选系列</div>
+      <h2 class="section-title">THE<br><span class="outline">COLLECTION</span></h2>
     </div>
-    <div class="watch-card">
-      <div class="card-img" style="box-shadow: 0 0 30px rgba(180,140,80,0.1);"></div>
-      <div class="card-name">MARINE CHRONO</div>
-      <div class="card-series">潜水系列 · 自动表</div>
-      <div class="card-price">¥ 45,600</div>
+    <a href="#" class="view-all">VIEW ALL →</a>
+  </div>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="product-img">
+        <img src="img/watch1.png" alt="X1 CHRONO" onerror="this.style.display='none'">
+        <span class="product-badge badge-new">NEW</span>
+      </div>
+      <div class="product-body">
+        <div class="product-name">X1 CHRONO</div>
+        <div class="product-series">街头系列 · 自动机械</div>
+        <div class="product-bottom">
+          <div class="product-price">¥ 3,980 <small>起</small></div>
+          <button class="product-btn">+</button>
+        </div>
+      </div>
     </div>
-    <div class="watch-card">
-      <div class="card-img" style="box-shadow: 0 0 30px rgba(180,140,80,0.1);"></div>
-      <div class="card-name">AVIATOR II</div>
-      <div class="card-series">飞行系列 · 计时表</div>
-      <div class="card-price">¥ 52,300</div>
+    <div class="product-card">
+      <div class="product-img">
+        <img src="img/watch2.png" alt="NEON RUNNER" onerror="this.style.display='none'">
+        <span class="product-badge badge-hot">HOT</span>
+      </div>
+      <div class="product-body">
+        <div class="product-name">NEON RUNNER</div>
+        <div class="product-series">运动系列 · 石英机芯</div>
+        <div class="product-bottom">
+          <div class="product-price">¥ 2,680 <small>起</small></div>
+          <button class="product-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <img src="img/watch3.png" alt="VOID X" onerror="this.style.display='none'">
+      </div>
+      <div class="product-body">
+        <div class="product-name">VOID X</div>
+        <div class="product-series">赛博系列 · 限量编号</div>
+        <div class="product-bottom">
+          <div class="product-price">¥ 5,280 <small>起</small></div>
+          <button class="product-btn">+</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section feature-section" id="craft">
-  <div class="section-title">制表工艺</div>
-  <h2 class="section-heading">CRAFTSMANSHIP</h2>
-  <div class="feature-grid">
-    <div>
-      <div class="feature-icon">⚙</div>
-      <div class="feature-title">瑞士机芯</div>
-      <div class="feature-desc">每一枚机芯均经瑞士官方认证<br>精准走时，误差<±2秒/日</div>
-    </div>
-    <div>
-      <div class="feature-icon">💎</div>
-      <div class="feature-title">蓝宝石表镜</div>
-      <div class="feature-desc">莫氏硬度9级防刮蓝宝石<br>双面防反射镀膜</div>
-    </div>
-    <div>
-      <div class="feature-icon">🔩</div>
-      <div class="feature-title">316L精钢</div>
-      <div class="feature-desc">医用级不锈钢表壳<br>IP镀金/真空硬化处理</div>
-    </div>
-    <div>
-      <div class="feature-icon">🌊</div>
-      <div class="feature-title">100米防水</div>
-      <div class="feature-desc">螺旋表冠+密封垫圈设计<br>日常生活防水无忧</div>
-    </div>
+<section class="feature-band">
+  <div class="feat">
+    <div class="feat-icon">⚙</div>
+    <div class="feat-num">200</div>
+    <div class="feat-label">道精密工序</div>
   </div>
-</section>
-
-<section class="section" id="about">
-  <div class="about-section">
-    <div class="section-title">关于品牌</div>
-    <h2 class="section-heading">ABOUT MERIDIAN</h2>
-    <p class="about-text">
-      MERIDIAN 创立于1872年瑞士日内瓦，153年来专注于高端机械腕表的研发与制造。品牌坚持"功能美学"的设计哲学，将瑞士传统制表工艺与现代工程美学融合，每一枚腕表均出自日内瓦大师工匠之手，经200道以上精密工序打磨完成。MERIDIAN 相信：真正的奢华，藏在每一秒的精准与每一次心动的交汇处。
-    </p>
+  <div class="feat">
+    <div class="feat-icon">🌊</div>
+    <div class="feat-num">100M</div>
+    <div class="feat-label">生活防水</div>
+  </div>
+  <div class="feat">
+    <div class="feat-icon">💎</div>
+    <div class="feat-num">9H</div>
+    <div class="feat-label">蓝宝石硬度</div>
+  </div>
+  <div class="feat">
+    <div class="feat-icon">🕐</div>
+    <div class="feat-num">±5s</div>
+    <div class="feat-label">日误差精度</div>
   </div>
 </section>
 
 <footer id="contact">
-  <div class="footer-logo">MERIDIAN</div>
-  <div class="footer-copy">© 2026 MERIDIAN WATCH CO. ALL RIGHTS RESERVED.</div>
+  <div class="footer-logo">PULSE<span>.</span></div>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">小红书</a>
+    <a href="#">微博</a>
+    <a href="#">抖音</a>
+  </div>
+  <div class="footer-copy">© 2026 PULSE WATCHES. ALL RIGHTS RESERVED.</div>
 </footer>
 
 <script>
   // 实时秒针
   function tick() {
     const now = new Date();
-    const sec = now.getSeconds();
-    const min = now.getMinutes();
+    const sec = now.getSeconds(), min = now.getMinutes();
     const hr = now.getHours() % 12;
-    const secondDeg = sec * 6;
-    const minuteDeg = min * 6 + sec * 0.1;
-    const hourDeg = hr * 30 + min * 0.5;
-    const sEl = document.querySelector('.second-hand');
-    const mEl = document.querySelector('.minute-hand');
-    const hEl = document.querySelector('.hour-hand');
-    if (sEl) sEl.style.transform = `rotate(${secondDeg}deg)`;
-    if (mEl) mEl.style.transform = `rotate(${minuteDeg}deg)`;
-    if (hEl) hEl.style.transform = `rotate(${hourDeg}deg)`;
+    const s = sec * 6, m = min * 6 + sec * 0.1, h = hr * 30 + min * 0.5;
+    document.querySelector('.wf-s').style.transform = `rotate(${s}deg)`;
+    document.querySelector('.wf-m').style.transform = `rotate(${m}deg)`;
+    document.querySelector('.wf-h').style.transform = `rotate(${h}deg)`;
   }
-  tick();
-  setInterval(tick, 1000);
+  tick(); setInterval(tick, 1000);
+
+  // 倒计时（距离2026-06-01）
+  function countdown() {
+    const end = new Date('2026-06-01T00:00:00+08:00');
+    const now = new Date();
+    const diff = Math.max(0, end - now);
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('d').textContent = String(d).padStart(2,'0');
+    document.getElementById('h').textContent = String(h).padStart(2,'0');
+    document.getElementById('m').textContent = String(m).padStart(2,'0');
+    document.getElementById('s').textContent = String(s).padStart(2,'0');
+  }
+  countdown(); setInterval(countdown, 1000);
 </script>
 </body>
 </html>
