@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MERIDIAN 腕表</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
+  nav { position: fixed; top: 0; width: 100%; padding: 24px 60px; display: flex; justify-content: space-between; align-items: center; z-index: 100; background: rgba(10,10,10,0.8); backdrop-filter: blur(20px); }
+  .logo { font-size: 22px; font-weight: 700; letter-spacing: 6px; }
+  .nav-links { display: flex; gap: 40px; }
+  .nav-links a { color: #888; text-decoration: none; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: #fff; }
+  .hero { height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; position: relative; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, rgba(180,140,80,0.15) 0%, transparent 70%); pointer-events: none; }
+  .hero-content { text-align: center; position: relative; z-index: 1; }
+  .hero-tag { font-size: 11px; letter-spacing: 6px; color: #b48c50; text-transform: uppercase; margin-bottom: 30px; }
+  .hero h1 { font-size: 72px; font-weight: 300; letter-spacing: 12px; line-height: 1.1; margin-bottom: 20px; }
+  .hero h1 span { font-weight: 700; }
+  .hero-sub { font-size: 14px; color: #666; letter-spacing: 3px; margin-bottom: 60px; }
+  .watch-img { width: 300px; height: 300px; margin: 0 auto 60px; position: relative; }
+  .watch-img::before { content: ''; position: absolute; inset: -20px; border-radius: 50%; background: radial-gradient(circle, rgba(180,140,80,0.3) 0%, transparent 70%); animation: pulse 3s ease-in-out infinite; }
+  .watch-circle { width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(180,140,80,0.4); display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, #1a1a1a, #0a0a0a); box-shadow: 0 0 60px rgba(180,140,80,0.15), inset 0 0 40px rgba(0,0,0,0.8); }
+  .watch-face { width: 80%; height: 80%; border-radius: 50%; border: 1px solid rgba(180,140,80,0.25); position: relative; display: flex; align-items: center; justify-content: center; }
+  .watch-brand { font-size: 9px; letter-spacing: 4px; color: #b48c50; text-transform: uppercase; position: absolute; top: 28%; }
+  .watch-model { font-size: 7px; letter-spacing: 2px; color: #555; position: absolute; top: 36%; }
+  .hour-hand { position: absolute; width: 4px; height: 60px; background: linear-gradient(to top, #b48c50, #d4a864); top: 20px; left: calc(50% - 2px); transform-origin: bottom center; transform: rotate(135deg); border-radius: 2px; }
+  .minute-hand { position: absolute; width: 2px; height: 90px; background: linear-gradient(to top, #888, #ccc); top: 10px; left: calc(50% - 1px); transform-origin: bottom center; transform: rotate(270deg); border-radius: 2px; }
+  .second-hand { position: absolute; width: 1px; height: 100px; background: #b48c50; top: 0; left: calc(50% - 0.5px); transform-origin: bottom center; transform: rotate(80deg); border-radius: 1px; }
+  .center-dot { width: 8px; height: 8px; background: #b48c50; border-radius: 50%; position: relative; z-index: 2; }
+  .watch-mark { position: absolute; width: 1px; height: 8px; background: rgba(180,140,80,0.6); top: 8px; left: calc(50% - 0.5px); transform-origin: center 116px; }
+  .cta-btn { display: inline-block; padding: 16px 50px; border: 1px solid #b48c50; color: #b48c50; text-decoration: none; font-size: 12px; letter-spacing: 4px; text-transform: uppercase; transition: all 0.4s; }
+  .cta-btn:hover { background: #b48c50; color: #0a0a0a; }
+  .section { padding: 120px 60px; }
+  .section-title { font-size: 11px; letter-spacing: 6px; color: #b48c50; text-transform: uppercase; margin-bottom: 20px; }
+  .section-heading { font-size: 42px; font-weight: 300; letter-spacing: 4px; margin-bottom: 80px; }
+  .collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; }
+  .watch-card { background: #111; border: 1px solid #1a1a1a; padding: 40px; text-align: center; transition: all 0.4s; cursor: pointer; }
+  .watch-card:hover { border-color: #b48c50; transform: translateY(-5px); }
+  .card-img { width: 160px; height: 160px; margin: 0 auto 30px; border-radius: 50%; border: 1px solid #222; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 35% 35%, #1a1a1a, #0d0d0d); }
+  .card-name { font-size: 14px; letter-spacing: 3px; margin-bottom: 8px; }
+  .card-series { font-size: 11px; color: #555; letter-spacing: 2px; margin-bottom: 20px; }
+  .card-price { font-size: 16px; color: #b48c50; letter-spacing: 1px; }
+  .feature-section { background: #080808; }
+  .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; text-align: center; }
+  .feature-icon { width: 48px; height: 48px; border: 1px solid #b48c50; border-radius: 50%; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; color: #b48c50; font-size: 20px; }
+  .feature-title { font-size: 13px; letter-spacing: 2px; margin-bottom: 12px; }
+  .feature-desc { font-size: 12px; color: #555; line-height: 1.8; }
+  .about-section { max-width: 800px; margin: 0 auto; text-align: center; }
+  .about-text { font-size: 16px; color: #666; line-height: 2.2; font-weight: 300; }
+  footer { border-top: 1px solid #1a1a1a; padding: 60px; text-align: center; }
+  .footer-logo { font-size: 18px; font-weight: 700; letter-spacing: 6px; margin-bottom: 20px; }
+  .footer-copy { font-size: 11px; color: #333; letter-spacing: 2px; }
+  @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 36px; letter-spacing: 6px; }
+    nav { padding: 20px 30px; }
+    .nav-links { display: none; }
+    .collection-grid { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .section { padding: 80px 30px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">MERIDIAN</div>
+  <div class="nav-links">
+    <a href="#collection">系列</a>
+    <a href="#craft">工艺</a>
+    <a href="#about">关于</a>
+    <a href="#contact">联系</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">瑞士制表 · 始于1872</div>
+    <h1>TIME <span>IS</span><br>ART</h1>
+    <div class="hero-sub">每一秒，都是永恒</div>
+    <div class="watch-img">
+      <div class="watch-circle">
+        <div class="watch-face">
+          <span class="watch-brand">MERIDIAN</span>
+          <span class="watch-model">CAL. 9000</span>
+          <div class="hour-hand"></div>
+          <div class="minute-hand"></div>
+          <div class="second-hand"></div>
+          <div class="center-dot"></div>
+        </div>
+      </div>
+    </div>
+    <a href="#collection" class="cta-btn">探索系列</a>
+  </div>
+</section>
+
+<section class="section" id="collection">
+  <div class="section-title">精选系列</div>
+  <h2 class="section-heading">CLASSIC COLLECTION</h2>
+  <div class="collection-grid">
+    <div class="watch-card">
+      <div class="card-img" style="box-shadow: 0 0 30px rgba(180,140,80,0.1);"></div>
+      <div class="card-name">GRAND CRONOS</div>
+      <div class="card-series">经典系列 · 机械表</div>
+      <div class="card-price">¥ 68,800</div>
+    </div>
+    <div class="watch-card">
+      <div class="card-img" style="box-shadow: 0 0 30px rgba(180,140,80,0.1);"></div>
+      <div class="card-name">MARINE CHRONO</div>
+      <div class="card-series">潜水系列 · 自动表</div>
+      <div class="card-price">¥ 45,600</div>
+    </div>
+    <div class="watch-card">
+      <div class="card-img" style="box-shadow: 0 0 30px rgba(180,140,80,0.1);"></div>
+      <div class="card-name">AVIATOR II</div>
+      <div class="card-series">飞行系列 · 计时表</div>
+      <div class="card-price">¥ 52,300</div>
+    </div>
+  </div>
+</section>
+
+<section class="section feature-section" id="craft">
+  <div class="section-title">制表工艺</div>
+  <h2 class="section-heading">CRAFTSMANSHIP</h2>
+  <div class="feature-grid">
+    <div>
+      <div class="feature-icon">⚙</div>
+      <div class="feature-title">瑞士机芯</div>
+      <div class="feature-desc">每一枚机芯均经瑞士官方认证<br>精准走时，误差<±2秒/日</div>
+    </div>
+    <div>
+      <div class="feature-icon">💎</div>
+      <div class="feature-title">蓝宝石表镜</div>
+      <div class="feature-desc">莫氏硬度9级防刮蓝宝石<br>双面防反射镀膜</div>
+    </div>
+    <div>
+      <div class="feature-icon">🔩</div>
+      <div class="feature-title">316L精钢</div>
+      <div class="feature-desc">医用级不锈钢表壳<br>IP镀金/真空硬化处理</div>
+    </div>
+    <div>
+      <div class="feature-icon">🌊</div>
+      <div class="feature-title">100米防水</div>
+      <div class="feature-desc">螺旋表冠+密封垫圈设计<br>日常生活防水无忧</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="about-section">
+    <div class="section-title">关于品牌</div>
+    <h2 class="section-heading">ABOUT MERIDIAN</h2>
+    <p class="about-text">
+      MERIDIAN 创立于1872年瑞士日内瓦，153年来专注于高端机械腕表的研发与制造。品牌坚持"功能美学"的设计哲学，将瑞士传统制表工艺与现代工程美学融合，每一枚腕表均出自日内瓦大师工匠之手，经200道以上精密工序打磨完成。MERIDIAN 相信：真正的奢华，藏在每一秒的精准与每一次心动的交汇处。
+    </p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-logo">MERIDIAN</div>
+  <div class="footer-copy">© 2026 MERIDIAN WATCH CO. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<script>
+  // 实时秒针
+  function tick() {
+    const now = new Date();
+    const sec = now.getSeconds();
+    const min = now.getMinutes();
+    const hr = now.getHours() % 12;
+    const secondDeg = sec * 6;
+    const minuteDeg = min * 6 + sec * 0.1;
+    const hourDeg = hr * 30 + min * 0.5;
+    const sEl = document.querySelector('.second-hand');
+    const mEl = document.querySelector('.minute-hand');
+    const hEl = document.querySelector('.hour-hand');
+    if (sEl) sEl.style.transform = `rotate(${secondDeg}deg)`;
+    if (mEl) mEl.style.transform = `rotate(${minuteDeg}deg)`;
+    if (hEl) hEl.style.transform = `rotate(${hourDeg}deg)`;
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>
